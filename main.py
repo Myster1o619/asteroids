@@ -7,6 +7,7 @@
 
 import pygame
 from constants import *
+from player import Player
 
 def main():
     print("Starting asteroids!")
@@ -21,6 +22,8 @@ def main():
 
     dt = None
 
+    player_object = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
     running = True
     while running:
         for event in pygame.event.get():
@@ -33,8 +36,9 @@ def main():
 
 
         screen.fill((0,0,0))
+        player_object.draw(screen) # Render the player object to the screen
         # pygame.display.update()
-        pygame.display.flip()
+        pygame.display.flip() # Update the display shown on the screen
         clock.tick(60) # Limit the frame rate to 60 FPS.
         dt = 1000 / clock.tick(60)
 
