@@ -38,6 +38,7 @@ def main():
         screen.fill((0,0,0))
         player_object.draw(screen) # Render the player object to the screen
         # pygame.display.update()
+        player_object.update(dt)
         pygame.display.flip() # Update the display shown on the screen
         clock.tick(60) # Limit the frame rate to 60 FPS.
         dt = 1000 / clock.tick(60)
