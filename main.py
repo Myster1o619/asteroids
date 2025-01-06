@@ -8,6 +8,7 @@
 import pygame
 from constants import *
 from player import Player
+from asteroid import Asteroid
 
 def main():
     print("Starting asteroids!")
@@ -23,14 +24,19 @@ def main():
     dt = None
 
     player_object = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    asteroid_object = Asteroid(60, 60, 20)
+    asteroid_object.velocity = 200
 
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
 
-    player_object.containers = (updatable, drawable)
+    Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
 
-    updatable.add(player_object)
-    drawable.add(player_object)
+    updatable.add(player_object, asteroid_object)
+    drawable.add(player_object, asteroid_object)
+    asteroids.add(asteroid_object)
     
     running = True
     while running:
@@ -42,22 +48,19 @@ def main():
         #     if event.type == pygame.QUIT:
         #         return
 
+        
+        dt = clock.tick(60) / 1000
         screen.fill((0,0,0))
 
-        # drawable.draw(screen)
         for item in drawable:
             item.draw(screen)
         
-        # updatable.update()
         for item in updatable:
-            if item is player_object:
-                item.update(dt)
-        # player_object.draw(screen) # Render the player object to the screen
-        # player_object.update(dt)
-        # pygame.display.update()
+            item.update(dt)
+
         pygame.display.flip() # Update the display shown on the screen
         clock.tick(60) # Limit the frame rate to 60 FPS.
-        dt = clock.tick(60) / 1000
+        
 
 if __name__ == "__main__":
     main()
