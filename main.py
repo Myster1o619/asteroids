@@ -18,6 +18,12 @@ def main():
 
     pygame.init()
 
+    def handle_exit():
+        pygame.display.quit()
+        pygame.quit()
+        exit()
+        
+
     screen = pygame.display.set_mode((1280, 720))
     # Add a clock to limit the frame rate.
     clock = pygame.time.Clock()
@@ -54,6 +60,11 @@ def main():
         
         for item in updatable:
             item.update(dt)
+
+        for asteroid in asteroids:
+            if asteroid.detect_collision(player_object):
+                print("Game over!")
+                handle_exit()
 
         pygame.display.flip() # Update the display shown on the screen
         clock.tick(60) # Limit the frame rate to 60 FPS.
