@@ -23,14 +23,18 @@ class CircleShape(pygame.sprite.Sprite):
         pass
 
     def distance_to(self, circle_object):
-        return math.sqrt(
-            (circle_object.position.x - self.position.x) ** 2 +
-            (circle_object.position.y - self.position.y) ** 2 -
-            (circle_object.radius + self.radius)
-            )
+        if circle_object:
+            return math.sqrt(
+                (circle_object.position.x - self.position.x) ** 2 +
+                (circle_object.position.y - self.position.y) ** 2 -
+                (circle_object.radius + self.radius)
+                )
+        return
     
     def detect_collision(self, circle_object):
-        distance = self.distance_to(circle_object)
-        if distance <= circle_object.radius + self.radius:
-            return True
-        return False
+        if circle_object:
+            distance = self.distance_to(circle_object)
+            if distance <= circle_object.radius + self.radius:
+                return True
+            return False
+        return
