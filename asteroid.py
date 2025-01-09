@@ -17,7 +17,7 @@ class Asteroid(CircleShape):
 
     def split(self):
         self.kill()
-        if self.radius == ASTEROID_MIN_RADIUS:
+        if self.radius == ASTEROID_MIN_RADIUS: # Small asteroid hit, don't spawn new asteroids
             return
         else:
             asteroid_split_angle = self.__generate_random_angle()
