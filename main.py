@@ -58,8 +58,8 @@ def main():
         dt = clock.tick(60) / 1000
         screen.fill((0,0,0))
 
-        for item in drawable:
-            item.draw(screen)
+        # for item in drawable:
+        #     item.draw(screen)
         
         for item in updatable:
             item.update(dt)
@@ -74,6 +74,9 @@ def main():
             if asteroid.detect_collision(player_object):
                 print("Game over!")
                 handle_exit()
+
+        for item in drawable:
+            item.draw(screen)
 
         pygame.display.flip() # Update the display shown on the screen
         clock.tick(60) # Limit the frame rate to 60 FPS.
